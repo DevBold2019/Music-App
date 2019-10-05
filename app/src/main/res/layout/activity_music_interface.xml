@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MusicInterface">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@drawable/mine"
+        android:scaleType="centerCrop"/>
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#24DA61"
+        android:id="@+id/tool"
+        app:title="BoldMusic">
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drake"
+        android:id="@+id/AName"
+        android:layout_below="@+id/tool"
+        android:layout_marginTop="20dp"
+        android:textColor="#000"
+        android:textSize="22sp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Started from The bottom"
+        android:id="@+id/SName"
+        android:layout_below="@+id/AName"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"/>
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/musicpic"
+        android:src="@drawable/ciara"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_headset_black"
+        android:id="@+id/lyricNotFound"
+        android:text="Lyrics not Available"
+        android:layout_below="@+id/musicpic"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/lyricNotFound"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="30dp"
+        android:id="@+id/fav"
+        android:background="@drawable/ic_favorite_border_black_24dp"/>
+
+
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sk"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/fav"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/sk"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_skip_previous"/>
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:onClick="pause"
+            android:id="@+id/play"
+            android:background="@drawable/ic_play" />
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/ic_skip_next" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
