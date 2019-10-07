@@ -1,13 +1,14 @@
 package com.example.savetointernal.musify;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+
+import com.example.savetointernal.musify.Fragments.HomeFragment;
+import com.example.savetointernal.musify.Fragments.MusicFragment;
 
 public class MainWindow extends AppCompatActivity {
 
@@ -17,33 +18,30 @@ public class MainWindow extends AppCompatActivity {
         setContentView(R.layout.activity_main_window);
 
         BottomNavigationView bottomNavigationView=(BottomNavigationView)findViewById(R.id.bootomNav);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
+                Fragment selectedFragment=null;
+
                 switch (menuItem.getItemId()){
-                    case R.id.search:
-                        Toast.makeText(MainWindow.this,"Searching",Toast.LENGTH_LONG).show();
+                    case R.id.Home:
+                        selectedFragment=new HomeFragment();
+
                         break;
 
-                    case R.id.musicmp3:
+                    case R.id.playlist:
 
-                        Intent intent=new Intent(MainWindow.this,MyMusic.class);
-                        startActivity(intent);
-                        finish();
+                        selectedFragment=new MusicFragment();
                         break;
 
                 }
 
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+
                 return true;
             }
         });
-    }
-
-    public void showMusicScreen(View view) {
-
-        Intent intent=new Intent(MainWindow.this,MusicInterface.class);
-        startActivity(intent);
-        finish();
     }
 }

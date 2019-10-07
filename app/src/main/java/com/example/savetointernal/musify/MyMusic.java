@@ -5,11 +5,13 @@ import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -36,7 +38,6 @@ public class MyMusic extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
         //seekBar=(SeekBar) findViewById(R.id.seekbar);
 
 
@@ -54,7 +55,6 @@ public class MyMusic extends AppCompatActivity {
 
         songAdapter=new SongAdapter(songs,this);
         recyclerView.setAdapter(songAdapter);
-
 
 
        /* songAdapter.setOnitemClickListener(new SongAdapter.OnitemClickListener() {
@@ -93,12 +93,11 @@ public class MyMusic extends AppCompatActivity {
 
     }
 
-
-
     public void loadSongs(){
 
         Uri musicUri= MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String pick=MediaStore.Audio.Media.IS_MUSIC;
+
         Cursor cursor= getContentResolver().query(musicUri,null,pick,null,null);
 
         if (cursor !=null){
@@ -124,9 +123,9 @@ public class MyMusic extends AppCompatActivity {
 
     public void showMusicScreen(View view) {
 
-
         Intent intent=new Intent(MyMusic.this,MusicInterface.class);
         startActivity(intent);
         finish();
+
     }
 }

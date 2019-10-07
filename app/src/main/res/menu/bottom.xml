@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/Acc"
+        android:id="@+id/Home"
         android:title="Home"
         android:icon="@drawable/ic_home"/>
-
-    <item
-        android:id="@+id/search"
-        android:title="search"
-        android:icon="@drawable/ic_search"/>
-    <item
-        android:id="@+id/musicmp3"
-        android:title="Library"
-        android:icon="@drawable/ic_library"/>
 
     <item
         android:id="@+id/playlist"
         android:title="Playlist"
         android:icon="@drawable/ic_playlist_play"/>
+
+    <item
+        android:id="@+id/search"
+        android:title="search"
+        android:icon="@drawable/ic_search"/>
+
 
 </menu>

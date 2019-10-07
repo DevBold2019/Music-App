@@ -1,6 +1,7 @@
 package com.example.savetointernal.musify;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +63,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongHolder> {
                 if (onitemClickListener==null){
 
                     onitemClickListener.onItemClick(songHolder.b1,v,mf,i);
+                    Toast.makeText(context, "playing this song in a while \t"+songHolder.tv2.getText()+"", Toast.LENGTH_SHORT).show();
 
                 }
+
             }
         });
 
@@ -70,14 +74,16 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongHolder> {
 
     @Override
     public int getItemCount() {
+
         return songs.size();
     }
 
-    public class SongHolder extends RecyclerView.ViewHolder{
+    class SongHolder extends RecyclerView.ViewHolder{
 
         TextView tv1,tv2,tv3;
         Button b1;
-        public SongHolder(@NonNull View itemView) {
+
+        SongHolder(@NonNull View itemView) {
             super(itemView);
 
             tv1=itemView.findViewById(R.id.ArtistName);

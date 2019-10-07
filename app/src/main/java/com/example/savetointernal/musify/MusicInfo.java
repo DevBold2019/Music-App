@@ -10,11 +10,13 @@ public class MusicInfo {
         this.songUrl = songUrl;
     }
 
-    public String getArtistName() {
+    public String getArtistName()
+    {
         return artistName;
     }
 
     public void setArtistName(String artistName) {
+
         this.artistName = artistName;
     }
 
@@ -23,6 +25,7 @@ public class MusicInfo {
     }
 
     public void setSongName(String songName) {
+
         this.songName = songName;
     }
 
