@@ -17,7 +17,8 @@ public class MainWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_window);
 
-        BottomNavigationView bottomNavigationView=(BottomNavigationView)findViewById(R.id.bootomNav);
+        final BottomNavigationView bottomNavigationView=(BottomNavigationView)findViewById(R.id.bootomNav);
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -40,8 +41,13 @@ public class MainWindow extends AppCompatActivity {
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
 
+
                 return true;
             }
         });
+
+        if (savedInstanceState == null) {
+            bottomNavigationView.setSelectedItemId(R.id.Home); // change to whichever id should be default
+        }
     }
 }

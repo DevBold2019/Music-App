@@ -60,9 +60,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongHolder> {
             @Override
             public void onClick(View v) {
 
-                if (onitemClickListener==null){
+                if (onitemClickListener!=null){
 
                     onitemClickListener.onItemClick(songHolder.b1,v,mf,i);
+
                     Toast.makeText(context, "playing this song in a while \t"+songHolder.tv2.getText()+"", Toast.LENGTH_SHORT).show();
 
                 }
@@ -88,7 +89,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongHolder> {
 
             tv1=itemView.findViewById(R.id.ArtistName);
             tv2=itemView.findViewById(R.id.SongName);
-            b1=itemView.findViewById(R.id.starthere);
+            b1=itemView.findViewById(R.id.playMusic);
 
         }
     }
