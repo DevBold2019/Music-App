@@ -47,9 +47,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.SongHolder> {
 
             songHolder.tvSongName.setText(s.getSongname());
             songHolder.tvSongArtist.setText(s.getArtistname());
+
             songHolder.btnAction.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     if (mOnItemClickListener != null) {
                         mOnItemClickListener.onItemClick(songHolder.btnAction,v, s, i);
                     }

@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,8 @@ public class MusicFragment extends Fragment {
     MyAdapter songAdapter;
     TextView SName;
     TextView AName;
+    ImageButton imb,imb1;
+    int length;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,7 +70,8 @@ public class MusicFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         seekBar = view.findViewById(R.id.seekbar);
-
+        imb=view.findViewById(R.id.playMusic);
+        imb1=view.findViewById(R.id.pauseMusic);
         songs=new ArrayList<>();
 
 
@@ -81,14 +85,43 @@ public class MusicFragment extends Fragment {
             @Override
             public void onItemClick(final Button b, View view, final SongInfo obj, int position) {
 
+
+                imb.setVisibility(View.VISIBLE);
+                imb1.setVisibility(View.GONE);
+
+
                 if(b.getText().equals("Stop")){
+
                     mediaPlayer.stop();
                     mediaPlayer.reset();
                     mediaPlayer.release();
                     mediaPlayer = null;
+                    imb.setVisibility(View.VISIBLE);
+                    imb1.setVisibility(View.GONE);
                     b.setText("Play");
 
-                }else {
+
+                }if (b.getText().equals("paused")) {
+
+                    mediaPlayer.pause();
+                    b.setText("resumed");
+
+                    imb.setVisibility(View.VISIBLE);
+                    imb1.setVisibility(View.GONE);
+
+                }
+
+                if (b.getText().equals("resumed")) {
+
+                    length=mediaPlayer.getCurrentPosition();
+                    mediaPlayer.seekTo(length);
+                    mediaPlayer.start();
+                   // b.setText("Stop");
+
+                imb.setVisibility(View.GONE);
+                imb1.setVisibility(View.VISIBLE);
+
+            } else {
 
                     Runnable runnable = new Runnable() {
                         @Override
@@ -99,19 +132,56 @@ public class MusicFragment extends Fragment {
                                 AName.setText(obj.getArtistname());
                                 SName.setText(obj.getSongname());
 
+
                                 mediaPlayer.prepareAsync();
                                 mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                                     @Override
-                                    public void onPrepared(MediaPlayer mp) {
+                                    public void onPrepared(final MediaPlayer mp) {
+
+                                        length=mp.getCurrentPosition();
+
                                         mp.start();
+
+                                        imb.setVisibility(View.VISIBLE);
+                                        imb1.setVisibility(View.GONE);
+
+                                        if (mp.getCurrentPosition()<0){
+
+                                            seekBar.setMax(0);
+                                        }
                                         seekBar.setProgress(0);
                                         seekBar.setMax(mediaPlayer.getDuration());
-                                        Log.d("Prog", "run: " + mediaPlayer.getDuration());
+
+                                      imb.setOnClickListener(new View.OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+
+                                              mp.pause();
+                                              mp.getCurrentPosition();
+                                              b.setText("paused");
+                                              imb.setVisibility(View.GONE);
+                                              imb1.setVisibility(View.VISIBLE);
+
+                                          }
+                                      });
+
+                                      imb1.setOnClickListener(new View.OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+
+                                              length=mp.getCurrentPosition();
+                                              mp.seekTo(length);
+                                              mp.start();
+
+                                              imb1.setVisibility(View.GONE);
+                                              imb.setVisibility(View.VISIBLE);
+                                          }
+                                      });
+
+
                                     }
                                 });
                                 b.setText("Stop");
-
-
 
                             }catch (Exception e){}
                         }
