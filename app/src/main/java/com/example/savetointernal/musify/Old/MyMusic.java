@@ -1,4 +1,4 @@
-package com.example.savetointernal.musify;
+package com.example.savetointernal.musify.Old;
 
 import android.Manifest;
 import android.content.Intent;
@@ -11,25 +11,22 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.example.savetointernal.musify.MusicInterface;
+import com.example.savetointernal.musify.R;
 import com.example.savetointernal.musify.Testing.MyAdapter;
 import com.example.savetointernal.musify.Testing.SongInfo;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MyMusic extends AppCompatActivity {
 
@@ -197,7 +194,7 @@ public class MyMusic extends AppCompatActivity {
 
     public void showMusicScreen(View view) {
 
-        Intent intent=new Intent(MyMusic.this,MusicInterface.class);
+        Intent intent=new Intent(MyMusic.this, MusicInterface.class);
         startActivity(intent);
         finish();
 

@@ -15,29 +15,23 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/ciara"
+            android:id="@+id/albumPicture"
            android:layout_margin="2dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ciara"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:layout_margin="2dp"
+            android:textSize="13sp"
+            android:id="@+id/albumName"
             android:padding="2dp"
             android:layout_gravity="start"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="I Bet"
-            android:textColor="#f2f2f2"
-            android:layout_margin="2dp"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:layout_gravity="start"/>
 
 
 

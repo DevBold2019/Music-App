@@ -1,7 +1,6 @@
 package com.example.savetointernal.musify.Fragments;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -14,8 +13,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,17 +26,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.savetointernal.musify.MusicInfo;
 import com.example.savetointernal.musify.MusicInterface;
-import com.example.savetointernal.musify.MyMusic;
 import com.example.savetointernal.musify.R;
-import com.example.savetointernal.musify.SongAdapter;
 import com.example.savetointernal.musify.Testing.MyAdapter;
 import com.example.savetointernal.musify.Testing.SongInfo;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MusicFragment extends Fragment {
@@ -52,8 +45,11 @@ public class MusicFragment extends Fragment {
     MyAdapter songAdapter;
     TextView SName;
     TextView AName;
-    ImageButton imb,imb1;
-    int length;
+    ImageButton imb,imb1,next;
+    int length,len;
+    int playlist;
+    int maximum;
+    CardView cardView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,6 +60,9 @@ public class MusicFragment extends Fragment {
 
         SName=view.findViewById(R.id.displayPlayingSongName);
         AName=view.findViewById(R.id.displayPlayingSongArtist);
+        cardView=view.findViewById(R.id.miniCard);
+
+
 
 
         recyclerView = view.findViewById(R.id.recy);
@@ -72,9 +71,14 @@ public class MusicFragment extends Fragment {
         seekBar = view.findViewById(R.id.seekbar);
         imb=view.findViewById(R.id.playMusic);
         imb1=view.findViewById(R.id.pauseMusic);
+        next=view.findViewById(R.id.nextMusic);
+
+
+
+
+
+
         songs=new ArrayList<>();
-
-
         songAdapter = new MyAdapter(getContext(),songs);
         recyclerView.setAdapter(songAdapter);
 
@@ -86,8 +90,9 @@ public class MusicFragment extends Fragment {
             public void onItemClick(final Button b, View view, final SongInfo obj, int position) {
 
 
-                imb.setVisibility(View.VISIBLE);
+                imb.setVisibility(View.GONE);
                 imb1.setVisibility(View.GONE);
+
 
 
                 if(b.getText().equals("Stop")){
@@ -138,12 +143,13 @@ public class MusicFragment extends Fragment {
                                     @Override
                                     public void onPrepared(final MediaPlayer mp) {
 
-                                        length=mp.getCurrentPosition();
+
+                                         maximum = mediaPlayer.getDuration();
 
                                         mp.start();
 
-                                        imb.setVisibility(View.VISIBLE);
-                                        imb1.setVisibility(View.GONE);
+                                        //imb.setVisibility(View.VISIBLE);
+                                        imb1.setVisibility(View.VISIBLE);
 
                                         if (mp.getCurrentPosition()<0){
 
@@ -157,6 +163,7 @@ public class MusicFragment extends Fragment {
                                           public void onClick(View v) {
 
                                               mp.pause();
+                                            //  mp.setNextMediaPlayer();
                                               mp.getCurrentPosition();
                                               b.setText("paused");
                                               imb.setVisibility(View.GONE);
@@ -165,23 +172,52 @@ public class MusicFragment extends Fragment {
                                           }
                                       });
 
+
                                       imb1.setOnClickListener(new View.OnClickListener() {
                                           @Override
                                           public void onClick(View v) {
+
+                                              imb1.setVisibility(View.GONE);
+                                              imb.setVisibility(View.VISIBLE);
 
                                               length=mp.getCurrentPosition();
                                               mp.seekTo(length);
                                               mp.start();
 
-                                              imb1.setVisibility(View.GONE);
-                                              imb.setVisibility(View.VISIBLE);
+
                                           }
                                       });
+
+                                      next.setOnClickListener(new View.OnClickListener() {
+                                          @Override
+                                          public void onClick(View v) {
+
+                                              Toast.makeText(getContext(),"loading ..",Toast.LENGTH_SHORT).show();
+
+                                          }
+                                      });
+
+                                        cardView.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+
+                                                Intent intent=new Intent(getContext(), MusicInterface.class);
+                                                Bundle bundle=new Bundle();
+                                                bundle.putString("songName",obj.getSongname());
+                                                bundle.putInt("position",len);
+                                                bundle.putInt("Maxposition",maximum);
+                                                bundle.putString("artistName",obj.getArtistname());
+                                                intent.putExtras(bundle);
+                                                startActivity(intent);
+                                                getActivity().finish();
+                                            }
+                                        });
 
 
                                     }
                                 });
                                 b.setText("Stop");
+                                imb1.setVisibility(View.VISIBLE);
 
                             }catch (Exception e){}
                         }
@@ -200,14 +236,7 @@ public class MusicFragment extends Fragment {
         Thread t = new runThread();
         t.start();
 
- /*   public void showMusicScreen(View view) {
 
-        Intent intent=new Intent(getActivity(),MusicInterface.class);
-        startActivity(intent);
-        getActivity().finish();
-
-    }
-*/
 
 
  return view;
@@ -233,6 +262,7 @@ public class MusicFragment extends Fragment {
                         @Override
                         public void run() {
                             seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                            len=mediaPlayer.getCurrentPosition();
                         }
                     });
 
@@ -282,6 +312,7 @@ public class MusicFragment extends Fragment {
                     String name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
                     String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
                     String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
+                   // int pic=cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
 
                     SongInfo s = new SongInfo(name,artist,url);
                     songs.add(s);
@@ -295,13 +326,6 @@ public class MusicFragment extends Fragment {
         }
     }
 
-    public void showMusicScreen(View view) {
-
-        Intent intent=new Intent(getContext(), MusicInterface.class);
-        startActivity(intent);
-        getActivity().finish();
-
-    }
 
 
 

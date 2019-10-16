@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.savetointernal.musify.R;
-import com.example.savetointernal.musify.SongAdapter;
 
 import java.util.ArrayList;
 
