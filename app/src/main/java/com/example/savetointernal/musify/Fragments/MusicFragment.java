@@ -28,15 +28,15 @@ import android.widget.Toast;
 
 import com.example.savetointernal.musify.MusicInterface;
 import com.example.savetointernal.musify.R;
-import com.example.savetointernal.musify.Testing.MyAdapter;
-import com.example.savetointernal.musify.Testing.SongInfo;
+import com.example.savetointernal.musify.Fragments.Adapters.MyAdapter;
+import com.example.savetointernal.musify.Fragments.Models.SongInfoModel;
 
 import java.util.ArrayList;
 
 
 public class MusicFragment extends Fragment {
 
-    ArrayList<SongInfo> songs;
+    ArrayList<SongInfoModel> songs;
     // public RecyclerView.Adapter adapter;
     RecyclerView recyclerView; //recy
     private Handler myHandler = new Handler();;
@@ -87,7 +87,7 @@ public class MusicFragment extends Fragment {
 
         songAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(final Button b, View view, final SongInfo obj, int position) {
+            public void onItemClick(final Button b, View view, final SongInfoModel obj, int position) {
 
 
                 imb.setVisibility(View.GONE);
@@ -314,7 +314,7 @@ public class MusicFragment extends Fragment {
                     String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                    // int pic=cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
 
-                    SongInfo s = new SongInfo(name,artist,url);
+                    SongInfoModel s = new SongInfoModel(name,artist,url);
                     songs.add(s);
 
                 }while (cursor.moveToNext());

@@ -1,4 +1,4 @@
-package com.example.savetointernal.musify.Testing;
+package com.example.savetointernal.musify.Fragments.Models;
 
 public class albums_model {
     int albumPic;

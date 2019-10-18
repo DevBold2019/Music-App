@@ -1,4 +1,4 @@
-package com.example.savetointernal.musify.Testing;
+package com.example.savetointernal.musify.Fragments.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.savetointernal.musify.Fragments.Models.albums_model;
 import com.example.savetointernal.musify.R;
 
 import java.util.List;

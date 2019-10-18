@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.savetointernal.musify.R;
-import com.example.savetointernal.musify.Testing.albums_Adapter;
-import com.example.savetointernal.musify.Testing.albums_model;
+import com.example.savetointernal.musify.Fragments.Adapters.albums_Adapter;
+import com.example.savetointernal.musify.Fragments.Models.albums_model;
 
 import java.util.ArrayList;
 import java.util.List;

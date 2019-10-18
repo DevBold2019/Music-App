@@ -1,14 +1,11 @@
-package com.example.savetointernal.musify.Testing;
+package com.example.savetointernal.musify.Fragments.Models;
 
-    public class SongInfo {
+    public class SongInfoModel {
         private String Songname;
         private String Artistname;
         private String SongUrl;
 
-        public SongInfo() {
-        }
-
-        public SongInfo(String songname, String artistname, String songUrl) {
+        public SongInfoModel(String songname, String artistname, String songUrl) {
             Songname = songname;
             Artistname = artistname;
             SongUrl = songUrl;

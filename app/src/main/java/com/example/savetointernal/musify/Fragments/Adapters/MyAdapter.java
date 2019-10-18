@@ -1,4 +1,4 @@
-package com.example.savetointernal.musify.Testing;
+package com.example.savetointernal.musify.Fragments.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,23 +8,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.savetointernal.musify.Fragments.Models.SongInfoModel;
 import com.example.savetointernal.musify.R;
 
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.SongHolder> {
 
-        private ArrayList<SongInfo> _songs = new ArrayList<SongInfo>();
+        private ArrayList<SongInfoModel> _songs = new ArrayList<SongInfoModel>();
         private Context context;
         private OnItemClickListener mOnItemClickListener;
 
-        public MyAdapter(Context context, ArrayList<SongInfo> songs) {
+        public MyAdapter(Context context, ArrayList<SongInfoModel> songs) {
             this.context = context;
             this._songs = songs;
         }
 
         public interface OnItemClickListener {
-            void onItemClick(Button b , View view, SongInfo obj, int position);
+            void onItemClick(Button b , View view, SongInfoModel obj, int position);
         }
 
         public  void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -42,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.SongHolder> {
 
         @Override
         public void onBindViewHolder(final SongHolder songHolder, final int i) {
-            final SongInfo s = _songs.get(i);
+            final SongInfoModel s = _songs.get(i);
 
             songHolder.tvSongName.setText(s.getSongname());
             songHolder.tvSongArtist.setText(s.getArtistname());
