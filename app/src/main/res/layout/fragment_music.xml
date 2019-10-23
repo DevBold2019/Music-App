@@ -11,12 +11,14 @@
         android:id="@+id/recy"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintBottom_toTopOf="@+id/miniCard"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="-26dp">
 
     </android.support.v7.widget.RecyclerView>
+
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -41,7 +43,7 @@
                 android:layout_margin="10dp"/>
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/smallpic"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -56,6 +58,7 @@
                     android:maxWidth="100dp"
                     android:maxLines="1"
                     android:padding="10dp"
+                    android:textColor="@color/colorAccent"
                     android:layout_marginLeft="30dp"
                     app:layout_constraintLeft_toRightOf="@+id/smallpic"
                     app:layout_constraintTop_toBottomOf="@id/seekbar"
@@ -70,6 +73,7 @@
                     app:layout_constraintTop_toBottomOf="@id/displayPlayingSongName"
                     android:textSize="13sp"
                     android:maxWidth="130dp"
+                    android:textColor="@color/textColor"
                     android:layout_marginLeft="30dp"
                     android:padding="6dp"
                     android:maxLines="1"
@@ -86,7 +90,7 @@
                 app:layout_constraintLeft_toRightOf="@+id/displayPlayingSongName"
                 app:layout_constraintTop_toBottomOf="@id/seekbar"
                 android:padding="4dp"
-                android:background="#f2f2f2"
+                android:background="@drawable/butonbg"
                 android:src="@drawable/ic_play"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
@@ -100,7 +104,7 @@
                 app:layout_constraintTop_toBottomOf="@id/seekbar"
                 app:layout_constraintLeft_toRightOf="@+id/displayPlayingSongName"
                 android:padding="4dp"
-                android:background="#f2f2f2"
+                android:background="@drawable/butonbg"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ic_pause_black"
                 android:layout_marginLeft="30dp"
@@ -113,7 +117,7 @@
                 app:layout_constraintTop_toBottomOf="@id/seekbar"
              app:layout_constraintRight_toRightOf="parent"
                 android:padding="4dp"
-                android:background="#f2f2f2"
+                android:background="#FFF"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ic_skip_next"
                 android:layout_margin="10dp"

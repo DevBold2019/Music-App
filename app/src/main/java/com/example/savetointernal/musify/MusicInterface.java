@@ -38,7 +38,7 @@ public class MusicInterface extends AppCompatActivity {
         maxlength=bundle.getInt("Maxposition");
         songArtist=bundle.getString("artistName");
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
 

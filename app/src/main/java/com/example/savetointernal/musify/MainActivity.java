@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-  /*      new Handler().postDelayed(new Runnable() {
+       new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent=new Intent(MainActivity.this,MainWindow.class);
@@ -27,17 +27,7 @@ public class MainActivity extends AppCompatActivity {
         },timer);
 
 
-    }*/
-
     }
 
-    public void signIn(View view) {
 
-        Intent intent=new Intent(MainActivity.this,MainWindow.class);
-        startActivity(intent);
-        finish();
-
-
-
-    }
 }
