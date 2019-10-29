@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ import com.example.savetointernal.musify.R;
 import com.example.savetointernal.musify.Fragments.Adapters.MyAdapter;
 import com.example.savetointernal.musify.Fragments.Models.SongInfoModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -50,6 +52,7 @@ public class MusicFragment extends Fragment {
     int playlist;
     int maximum;
     CardView cardView;
+    int songIndex=0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class MusicFragment extends Fragment {
 
 
         SName=view.findViewById(R.id.displayPlayingSongName);
+        SName.setSelected(true);
         AName=view.findViewById(R.id.displayPlayingSongArtist);
         cardView=view.findViewById(R.id.miniCard);
 
@@ -87,46 +91,23 @@ public class MusicFragment extends Fragment {
 
         songAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(final Button b, View view, final SongInfoModel obj, int position) {
+            public void onItemClick(final LinearLayout l, View view, final SongInfoModel obj, int position) {
 
 
                 imb.setVisibility(View.GONE);
                 imb1.setVisibility(View.GONE);
 
+                    if(mediaPlayer==null){
 
+                        Toast.makeText(getContext(),"Select a song",Toast.LENGTH_SHORT).show();
 
-                if(b.getText().equals("Stop")){
+                    }else{
 
-                    mediaPlayer.stop();
-                    mediaPlayer.reset();
-                    mediaPlayer.release();
-                    mediaPlayer = null;
-                    imb.setVisibility(View.VISIBLE);
-                    imb1.setVisibility(View.GONE);
-                    b.setText("Play");
+                        mediaPlayer.stop();
+                        mediaPlayer=null;
 
+                    }
 
-                }if (b.getText().equals("paused")) {
-
-                    mediaPlayer.pause();
-                    b.setText("resumed");
-
-                    imb.setVisibility(View.VISIBLE);
-                    imb1.setVisibility(View.GONE);
-
-                }
-
-                if (b.getText().equals("resumed")) {
-
-                    length=mediaPlayer.getCurrentPosition();
-                    mediaPlayer.seekTo(length);
-                    mediaPlayer.start();
-                   // b.setText("Stop");
-
-                imb.setVisibility(View.GONE);
-                imb1.setVisibility(View.VISIBLE);
-
-            } else {
 
                     Runnable runnable = new Runnable() {
                         @Override
@@ -144,69 +125,71 @@ public class MusicFragment extends Fragment {
                                     public void onPrepared(final MediaPlayer mp) {
 
 
-                                         maximum = mediaPlayer.getDuration();
+                                        maximum = mediaPlayer.getDuration();
 
                                         mp.start();
 
                                         //imb.setVisibility(View.VISIBLE);
                                         imb1.setVisibility(View.VISIBLE);
 
-                                        if (mp.getCurrentPosition()<0){
+                                        if (mp.getCurrentPosition() < 0) {
 
                                             seekBar.setMax(0);
                                         }
                                         seekBar.setProgress(0);
                                         seekBar.setMax(mediaPlayer.getDuration());
 
-                                      imb.setOnClickListener(new View.OnClickListener() {
-                                          @Override
-                                          public void onClick(View v) {
+                                        imb.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
 
-                                              mp.pause();
-                                            //  mp.setNextMediaPlayer();
-                                              mp.getCurrentPosition();
-                                              b.setText("paused");
-                                              imb.setVisibility(View.GONE);
-                                              imb1.setVisibility(View.VISIBLE);
+                                                mp.pause();
+                                                //  mp.setNextMediaPlayer();
+                                                mp.getCurrentPosition();
+                                                //b.setText("paused");
+                                                imb.setVisibility(View.GONE);
+                                                imb1.setVisibility(View.VISIBLE);
 
-                                          }
-                                      });
-
-
-                                      imb1.setOnClickListener(new View.OnClickListener() {
-                                          @Override
-                                          public void onClick(View v) {
-
-                                              imb1.setVisibility(View.GONE);
-                                              imb.setVisibility(View.VISIBLE);
-
-                                              length=mp.getCurrentPosition();
-                                              mp.seekTo(length);
-                                              mp.start();
+                                            }
+                                        });
 
 
-                                          }
-                                      });
+                                        imb1.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
 
-                                      next.setOnClickListener(new View.OnClickListener() {
-                                          @Override
-                                          public void onClick(View v) {
+                                                imb1.setVisibility(View.GONE);
+                                                imb.setVisibility(View.VISIBLE);
 
-                                              Toast.makeText(getContext(),"loading ..",Toast.LENGTH_SHORT).show();
+                                                length = mp.getCurrentPosition();
+                                                mp.seekTo(length);
+                                                mp.start();
 
-                                          }
-                                      });
+
+                                            }
+                                        });
+
+                                        next.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+
+                                                Toast.makeText(getContext(), "loading ..", Toast.LENGTH_SHORT).show();
+                                                mediaPlayer.stop();
+
+
+                                            }
+                                        });
 
                                         cardView.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View v) {
 
-                                                Intent intent=new Intent(getContext(), MusicInterface.class);
-                                                Bundle bundle=new Bundle();
-                                                bundle.putString("songName",obj.getSongname());
-                                                bundle.putInt("position",len);
-                                                bundle.putInt("Maxposition",maximum);
-                                                bundle.putString("artistName",obj.getArtistname());
+                                                Intent intent = new Intent(getContext(), MusicInterface.class);
+                                                Bundle bundle = new Bundle();
+                                                bundle.putString("songName", obj.getSongname());
+                                                bundle.putInt("position", len);
+                                                bundle.putInt("Maxposition", maximum);
+                                                bundle.putString("artistName", obj.getArtistname());
                                                 intent.putExtras(bundle);
                                                 startActivity(intent);
                                                 getActivity().finish();
@@ -216,8 +199,10 @@ public class MusicFragment extends Fragment {
 
                                     }
                                 });
-                                b.setText("Stop");
+
+                                // b.setText("Stop");
                                 imb1.setVisibility(View.VISIBLE);
+
 
                             }catch (Exception e){}
                         }
@@ -226,7 +211,6 @@ public class MusicFragment extends Fragment {
                     myHandler.postDelayed(runnable,100);
 
                 }
-            }
         });
 
 
@@ -263,6 +247,26 @@ public class MusicFragment extends Fragment {
                         public void run() {
                             seekBar.setProgress(mediaPlayer.getCurrentPosition());
                             len=mediaPlayer.getCurrentPosition();
+
+                        }
+                    });
+                    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                            int currentPosition=seekBar.getProgress();
+
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+                           int Value= seekBar.getProgress();
+                            mediaPlayer.seekTo(Value+len);
                         }
                     });
 

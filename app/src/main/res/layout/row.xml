@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edsheran"
+                android:textColor="@color/colorAccent"
                 android:id="@+id/ArtistName"
                 android:textSize="20sp"/>
 
@@ -33,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Shape of you"
+                android:textColor="@color/textColor"
                 android:id="@+id/SongName"
                 android:textSize="16sp"/>
 
@@ -41,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:id="@+id/playMusic"
+                android:visibility="gone"
                 android:layout_gravity="start"
                 android:text="Play"/>
 

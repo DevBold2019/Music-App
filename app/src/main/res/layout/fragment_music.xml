@@ -52,21 +52,27 @@
                 android:layout_margin="10dp"
                 android:src="@drawable/concert1" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:maxWidth="100dp"
-                    android:maxLines="1"
-                    android:padding="10dp"
-                    android:textColor="@color/colorAccent"
-                    android:layout_marginLeft="30dp"
-                    app:layout_constraintLeft_toRightOf="@+id/smallpic"
-                    app:layout_constraintTop_toBottomOf="@id/seekbar"
-                    android:id="@+id/displayPlayingSongName"
-                    android:textSize="16sp"
-                    android:text="SongName"/>
+            <TextView
+                android:id="@+id/displayPlayingSongName"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginLeft="20dp"
 
-                <TextView
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:maxWidth="100dp"
+                android:padding="10dp"
+
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="SongName"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toRightOf="@+id/smallpic"
+                app:layout_constraintTop_toBottomOf="@id/seekbar" />
+
+            <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintLeft_toRightOf="@+id/smallpic"

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.savetointernal.musify.Fragments.Models.SongInfoModel;
@@ -25,7 +26,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.SongHolder> {
         }
 
         public interface OnItemClickListener {
-            void onItemClick(Button b , View view, SongInfoModel obj, int position);
+            void onItemClick(LinearLayout l , View view, SongInfoModel obj, int position);
         }
 
         public  void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -48,12 +49,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.SongHolder> {
             songHolder.tvSongName.setText(s.getSongname());
             songHolder.tvSongArtist.setText(s.getArtistname());
 
-            songHolder.btnAction.setOnClickListener(new View.OnClickListener() {
+            songHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onItemClick(songHolder.btnAction,v, s, i);
+                        mOnItemClickListener.onItemClick(songHolder.linearLayout,v, s, i);
                     }
                 }
             });
@@ -68,12 +69,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.SongHolder> {
 
             TextView tvSongName,tvSongArtist;
             Button btnAction;
+            LinearLayout linearLayout;
 
             public SongHolder(View itemView) {
                 super(itemView);
                 tvSongName = (TextView) itemView.findViewById(R.id.SongName);
                 tvSongArtist = (TextView) itemView.findViewById(R.id.ArtistName);
                 btnAction = (Button) itemView.findViewById(R.id.playMusic);
+                linearLayout=itemView.findViewById(R.id.hory);
             }
         }
 }

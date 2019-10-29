@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.savetointernal.musify.Fragments.Account;
 import com.example.savetointernal.musify.Fragments.HomeFragment;
 import com.example.savetointernal.musify.Fragments.MusicFragment;
 import com.example.savetointernal.musify.Fragments.searchFragment;
@@ -45,6 +46,12 @@ public class MainWindow extends AppCompatActivity {
                     case R.id.search:
 
                         selectedFragment=new searchFragment();
+
+                        break;
+
+                    case R.id.Account:
+
+                        selectedFragment=new Account();
 
                         break;
 

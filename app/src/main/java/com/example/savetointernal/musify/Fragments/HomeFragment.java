@@ -2,6 +2,7 @@ package com.example.savetointernal.musify.Fragments;
 
 
 import android.Manifest;
+import android.content.ContentUris;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -35,7 +36,6 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     albums_Adapter adapter;
     List<albums_model>list;
-    albums_model model;
 
 
     @Override
@@ -112,10 +112,13 @@ public class HomeFragment extends Fragment {
 
                     String album_name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM));
                     String artist_name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST));
-                    // String albumart=cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM_ART));
+                    long albumId = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID));
+
+                    Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
+                    Uri albumArtUri = ContentUris.withAppendedId(sArtworkUri, albumId);
 
 
-                    albums_model model=new albums_model(R.drawable.alex,album_name);
+                    albums_model model=new albums_model(albumArtUri,album_name);
                     list.add(model);
 
 

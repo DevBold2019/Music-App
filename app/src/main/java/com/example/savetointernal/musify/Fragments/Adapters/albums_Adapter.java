@@ -1,6 +1,7 @@
 package com.example.savetointernal.musify.Fragments.Adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +12,10 @@ import android.widget.TextView;
 
 import com.example.savetointernal.musify.Fragments.Models.albums_model;
 import com.example.savetointernal.musify.R;
+import com.squareup.picasso.Picasso;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 public class albums_Adapter extends RecyclerView.Adapter<albums_Adapter.viewholder> {
@@ -40,8 +44,22 @@ public class albums_Adapter extends RecyclerView.Adapter<albums_Adapter.viewhold
         albums_model model=list.get(i);
 
 
-        viewholder.imageView.setImageResource(model.getAlbumPic());
         viewholder.textView.setText(model.getAlbumName());
+
+
+        if (viewholder.imageView == null){
+
+            Picasso.get().load(R.drawable.logo3).into(viewholder.imageView);
+
+
+        }else{
+
+            Picasso.get().load(model.getAlbumPic()).into(viewholder.imageView);
+        }
+
+
+
+
 
 
     }
