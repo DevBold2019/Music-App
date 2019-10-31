@@ -12,44 +12,63 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="5dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/hory"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TextView
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/logo3"
+                android:layout_margin="5dp"
+                android:id="@+id/songImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edsheran"
-                android:textColor="@color/colorAccent"
-                android:id="@+id/ArtistName"
-                android:textSize="20sp"/>
+                android:orientation="vertical"
+                android:id="@+id/hory"
+                app:layout_constraintLeft_toRightOf="@+id/songImage"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edsheran"
+                    android:textColor="@color/colorAccent"
+                    android:id="@+id/ArtistName"
+                    android:textSize="20sp"/>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Shape of you"
-                android:textColor="@color/textColor"
-                android:id="@+id/SongName"
-                android:textSize="16sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Shape of you"
+                    android:textColor="@color/textColor"
+                    android:id="@+id/SongName"
+                    android:textSize="16sp"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:id="@+id/playMusic"
-                android:visibility="gone"
-                android:layout_gravity="start"
-                android:text="Play"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:id="@+id/playMusic"
+                    android:visibility="gone"
+                    android:layout_gravity="start"
+                    android:text="Play"/>
 
 
 
-        </LinearLayout>
+            </LinearLayout>
+
+
+
+
+        </android.support.constraint.ConstraintLayout>
 
 
     </android.support.v7.widget.CardView>

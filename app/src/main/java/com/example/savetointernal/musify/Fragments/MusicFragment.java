@@ -67,8 +67,6 @@ public class MusicFragment extends Fragment {
         cardView=view.findViewById(R.id.miniCard);
 
 
-
-
         recyclerView = view.findViewById(R.id.recy);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -78,15 +76,9 @@ public class MusicFragment extends Fragment {
         next=view.findViewById(R.id.nextMusic);
 
 
-
-
-
-
         songs=new ArrayList<>();
         songAdapter = new MyAdapter(getContext(),songs);
         recyclerView.setAdapter(songAdapter);
-
-
 
 
         songAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {

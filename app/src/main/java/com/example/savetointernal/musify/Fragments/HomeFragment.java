@@ -110,6 +110,7 @@ public class HomeFragment extends Fragment {
                     final String tracks = MediaStore.Audio.Albums.NUMBER_OF_SONGS;*/
 
 
+
                     String album_name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM));
                     String artist_name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST));
                     long albumId = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID));
