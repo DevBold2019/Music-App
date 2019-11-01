@@ -3,6 +3,7 @@ package com.example.savetointernal.musify.Fragments.Models;
 import android.net.Uri;
 
 public class albums_model {
+
     Uri albumPic;
     String albumName;
 
@@ -18,6 +19,7 @@ public class albums_model {
     }
 
     public void setAlbumPic(Uri albumPic) {
+
         this.albumPic = albumPic;
     }
 

@@ -20,18 +20,22 @@ package com.example.savetointernal.musify.Fragments.Models;
         }
 
         public String getArtistname() {
+
             return Artistname;
         }
 
         public void setArtistname(String artistname) {
+
             Artistname = artistname;
         }
 
         public String getSongUrl() {
+
             return SongUrl;
         }
 
         public void setSongUrl(String songUrl) {
+
             SongUrl = songUrl;
         }
 }
