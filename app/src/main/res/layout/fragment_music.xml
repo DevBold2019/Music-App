@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recy"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,11 +16,11 @@
         app:layout_constraintVertical_bias="1.0"
         tools:layout_editor_absoluteX="-26dp">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,8 +29,9 @@
         android:layout_margin="0dp">
 
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rela"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -40,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="10dp"/>
+                android:layout_margin="0dp"/>
 
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -57,13 +58,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginLeft="20dp"
-
                 android:ellipsize="marquee"
                 android:fadingEdge="horizontal"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:maxWidth="100dp"
                 android:padding="10dp"
-
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="SongName"
@@ -121,20 +120,19 @@
                 android:layout_height="50dp"
                 android:id="@+id/nextMusic"
                 app:layout_constraintTop_toBottomOf="@id/seekbar"
-             app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 android:padding="4dp"
                 android:background="#FFF"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/ic_skip_next"
-                android:layout_margin="10dp"
-                android:text="play"/>
+                android:layout_margin="10dp" />
 
 
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

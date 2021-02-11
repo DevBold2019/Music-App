@@ -2,6 +2,7 @@ package com.example.savetointernal.musify.Fragments;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -9,18 +10,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.savetointernal.musify.Fragments.Models.SongInfoModel;
 import com.example.savetointernal.musify.R;
 import com.example.savetointernal.musify.Fragments.Adapters.albums_Adapter;
 import com.example.savetointernal.musify.Fragments.Models.albums_model;
@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment {
     List<albums_model>list;
 
 
+    @SuppressLint("WrongConstant")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -52,10 +53,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayout.HORIZONTAL,false));
 
-        adapter=new albums_Adapter(list,getContext());
-        adapter.notifyDataSetChanged();
-        recyclerView.setAdapter(adapter);
-
 
 
 
@@ -64,14 +61,13 @@ public class HomeFragment extends Fragment {
 
     }
     private void checkUserPermission(){
-        if(Build.VERSION.SDK_INT>=23){
-            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+        if(Build.VERSION.SDK_INT>=23) {
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},123);
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 123);
                 return;
             }
         }
-        loadAlbums();
     }
 
     @Override
@@ -79,7 +75,7 @@ public class HomeFragment extends Fragment {
         switch (requestCode){
             case 123:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                   loadAlbums();
+                   //loadAlbums();
                 }else{
                     Toast.makeText(getContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
                     checkUserPermission();
@@ -103,14 +99,6 @@ public class HomeFragment extends Fragment {
             if(cursor.moveToFirst()){
                 do{
 
-                   /* final String _id = MediaStore.Audio.Albums._ID;
-                    final String album_name = MediaStore.Audio.Albums.ALBUM;
-                    final String artist = MediaStore.Audio.Albums.ARTIST;
-                    final String albumart = MediaStore.Audio.Albums.ALBUM_ART;
-                    final String tracks = MediaStore.Audio.Albums.NUMBER_OF_SONGS;*/
-
-
-
                     String album_name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM));
                     String artist_name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST));
                     long albumId = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID));
@@ -125,6 +113,10 @@ public class HomeFragment extends Fragment {
 
 
                 }while (cursor.moveToNext());
+
+                adapter=new albums_Adapter(list,getContext());
+                adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(adapter);
             }
 
             cursor.close();

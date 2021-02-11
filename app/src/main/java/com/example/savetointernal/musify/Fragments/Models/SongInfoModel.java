@@ -1,6 +1,9 @@
 package com.example.savetointernal.musify.Fragments.Models;
 
-    public class SongInfoModel {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class SongInfoModel implements Parcelable {
         private String Songname;
         private String Artistname;
         private String SongUrl;
@@ -11,7 +14,25 @@ package com.example.savetointernal.musify.Fragments.Models;
             SongUrl = songUrl;
         }
 
-        public String getSongname() {
+    protected SongInfoModel(Parcel in) {
+        Songname = in.readString();
+        Artistname = in.readString();
+        SongUrl = in.readString();
+    }
+
+    public static final Creator<SongInfoModel> CREATOR = new Creator<SongInfoModel>() {
+        @Override
+        public SongInfoModel createFromParcel(Parcel in) {
+            return new SongInfoModel(in);
+        }
+
+        @Override
+        public SongInfoModel[] newArray(int size) {
+            return new SongInfoModel[size];
+        }
+    };
+
+    public String getSongname() {
             return Songname;
         }
 
@@ -38,4 +59,17 @@ package com.example.savetointernal.musify.Fragments.Models;
 
             SongUrl = songUrl;
         }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(Songname);
+        parcel.writeString(Artistname);
+        parcel.writeString(SongUrl);
+    }
 }
