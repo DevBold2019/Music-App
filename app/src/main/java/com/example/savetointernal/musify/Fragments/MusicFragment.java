@@ -56,7 +56,7 @@ public class MusicFragment extends Fragment {
     CardView cardView;
     int songIndex=0;
     Runnable runnable;
-    boolean isIt;
+    boolean isItPaused;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -126,15 +126,10 @@ public class MusicFragment extends Fragment {
                                 public void onPrepared(final MediaPlayer mediaPlayer) {
 
                                     mediaPlayer.start();
-                                    //imb.setVisibility(View.VISIBLE);
+
                                     imb1.setVisibility(View.VISIBLE);
-
-                                    if (mediaPlayer.getCurrentPosition() < 0) {
-
-                                        seekBar.setMax(0);
-                                    }
-                                    seekBar.setProgress(0);
                                     seekBar.setMax(mediaPlayer.getDuration());
+
 
                                     imb1.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -142,11 +137,11 @@ public class MusicFragment extends Fragment {
 
                                             imb1.setVisibility(View.GONE);
                                             imb.setVisibility(View.VISIBLE);
+                                            isItPaused=true;
 
                                             mediaPlayer.pause();
-                                            //  mp.setNextMediaPlayer();
                                             mediaPlayer.getCurrentPosition();
-                                            //b.setText("paused");
+
 
 
 
@@ -160,10 +155,37 @@ public class MusicFragment extends Fragment {
 
                                             imb.setVisibility(View.GONE);
                                             imb1.setVisibility(View.VISIBLE);
+                                            isItPaused=false;
 
                                             length = mediaPlayer.getCurrentPosition();
                                             mediaPlayer.seekTo(length);
                                             mediaPlayer.start();
+
+
+                                        }
+                                    });
+
+                                    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                                        @Override
+                                        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+
+                                        }
+
+                                        @Override
+                                        public void onStartTrackingTouch(SeekBar seekBar) {
+
+                                        }
+
+                                        @Override
+                                        public void onStopTrackingTouch(SeekBar seekBar) {
+
+                                            if (!isItPaused){
+                                                mediaPlayer.seekTo(seekBar.getProgress());
+                                                mediaPlayer.start();
+                                                return;
+                                            }
+                                            seekBar.setProgress(seekBar.getProgress());
 
 
                                         }
@@ -217,127 +239,25 @@ public class MusicFragment extends Fragment {
 
                 if (mediaPlayer !=null){
 
-                   
+
                     seekBar.post(new Runnable() {
                         @Override
                         public void run() {
 
                             seekBar.setProgress(mediaPlayer.getCurrentPosition());
-                            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                                @Override
-                                public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-
-                                }
-
-                                @Override
-                                public void onStartTrackingTouch(SeekBar seekBar) {
-
-                                }
-
-                                @Override
-                                public void onStopTrackingTouch(SeekBar seekBar) {
-
-                                    mediaPlayer.seekTo(seekBar.getProgress());
-                                    mediaPlayer.start();
-                                }
-                            });
-
-                        }
-                    });
-                }
-
-
-            }
-
-
-
-
-
-        }
-    }
-    public void handle(){
-
-
-
-        Runnable runnable=new Runnable() {
-            @Override
-            public void run() {
-
-                    try {
-                        Thread.sleep(1000);
-                    }
-                    catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    if (mediaPlayer !=null){
-                        seekBar.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                seekBar.setProgress(mediaPlayer.getCurrentPosition());
-                                Log.d("Number is:",""+mediaPlayer.getCurrentPosition());
+                            if (isItPaused){
+                                seekBar.getProgress();
                             }
-                        });
-                    }
 
-
-
-
-            }
-        };
-
-        new Thread(runnable).start();
-
-
-
-
-
-    }
-
-    public class runThread extends Thread {
-
-
-        @Override
-        public void run() {
-            while (true) {
-
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Log.d("Runwa", "run: " + 1);
-                if (mediaPlayer != null) {
-                    seekBar.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            seekBar.setProgress(mediaPlayer.getCurrentPosition());
-                            len=mediaPlayer.getCurrentPosition();
 
                         }
                     });
-
-
-
                 }
+
+
             }
+            
         }
-
-    }
-
-
-    private void checkUserPermission(){
-        if(Build.VERSION.SDK_INT>=23){
-            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},123);
-                return;
-            }
-        }
-
-
     }
 
 
